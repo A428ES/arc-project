@@ -21,8 +21,8 @@ public class CommentService {
         return commentInterface;
     }
 
-    public List<CommentDoc> findCommentsByAuthorId(String authorId){
-        List<CommentDoc> comment = commentInterface.findByAuthorId(authorId);
+    public List<CommentDoc> findCommentsByAuthorId(String author_uuid){
+        List<CommentDoc> comment = commentInterface.findByAuthorId(author_uuid);
         return comment;
     }
 }
