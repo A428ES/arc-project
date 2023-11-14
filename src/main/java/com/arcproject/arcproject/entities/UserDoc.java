@@ -2,35 +2,35 @@ package com.arcproject.arcproject.entities;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection="users")
 public class UserDoc {
     @Id
     private String id;
     private String email;
-
-    @Field("first_name")
-    private String firstName;
-
-    @Field("ip_address")
-    private String ipAddress;
+    private String uuid;
+    private String first_name;
+    private String ip_address;
 
 
     public UserDoc(){
         
     }
 
-    public UserDoc(String email){
-        this.email = email;
+    public UserDoc(String uuid){
+        this.uuid = uuid;
     }
 
-    public String getFirstName(){
-        return this.firstName;
+    public String getuuid(){
+        return this.uuid;
     }
 
-    public String getIpAddress(){
-        return this.ipAddress;
+    public String getfirst_name(){
+        return this.first_name;
+    }
+
+    public String getip_address(){
+        return this.ip_address;
     }
 
     public String getEmail(){
