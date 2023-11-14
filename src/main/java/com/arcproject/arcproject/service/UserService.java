@@ -2,6 +2,8 @@ package com.arcproject.arcproject.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.arcproject.arcproject.entities.UserDoc;
 import com.arcproject.arcproject.interfaces.UserInterface;
 
 @Service
@@ -15,5 +17,9 @@ public class UserService {
 
     public UserInterface returnService(){
         return userInterface;
+    }
+
+    public UserDoc getUserByEmail(String userEmail) {
+        return userInterface.findByEmail(userEmail);
     }
 }
