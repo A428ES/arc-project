@@ -40,16 +40,6 @@ public class StoryDoc {
         this.author = author;
     }
 
-    // public String getAuthor(){
-    //     UserDoc user = userService.findByUuid(this.author_uuid);
-
-    //     if(user != null){
-    //         return user.getfirst_name();
-    //     } else {
-    //         return "not found";
-    //     }
-        
-    // }
 
     public String getDate(){
         this.date = "yesterday";
