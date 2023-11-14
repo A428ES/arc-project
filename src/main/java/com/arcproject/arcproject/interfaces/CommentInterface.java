@@ -1,10 +1,14 @@
 package com.arcproject.arcproject.interfaces;
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.arcproject.arcproject.entities.UserDoc;
+import com.arcproject.arcproject.entities.CommentDoc;
 
 @Repository
-public interface CommentInterface extends MongoRepository<UserDoc, String> {
-    
+public interface CommentInterface extends MongoRepository<CommentDoc, String> {
+    @Query("{ 'author_uuid' : ?0 }")
+    List<CommentDoc> findByAuthorId(String authorId);
 }
