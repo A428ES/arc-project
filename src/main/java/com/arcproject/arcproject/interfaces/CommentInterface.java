@@ -10,5 +10,5 @@ import com.arcproject.arcproject.entities.CommentDoc;
 @Repository
 public interface CommentInterface extends MongoRepository<CommentDoc, String> {
     @Query("{ 'author_uuid' : ?0 }")
-    List<CommentDoc> findByAuthorId(String authorId);
+    List<CommentDoc> findByAuthorId(String author_uuid);
 }
