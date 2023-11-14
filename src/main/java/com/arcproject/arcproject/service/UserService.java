@@ -22,4 +22,8 @@ public class UserService {
     public UserDoc getUserByEmail(String userEmail) {
         return userInterface.findByEmail(userEmail);
     }
+
+    public UserDoc findByUuid(String uuid){
+        return userInterface.findByUuid(uuid);
+    }
 }
