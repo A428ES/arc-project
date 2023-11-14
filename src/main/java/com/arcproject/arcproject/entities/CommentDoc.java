@@ -2,35 +2,42 @@ package com.arcproject.arcproject.entities;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection="comments")
 public class CommentDoc {
     @Id
     private String Id;
-
-    @Field("author_uuid")
-    private String authorId;
-
-    @Field("story_uuid")
-    private String storyId;
-
+    private String author_uuid;
+    private String story_uuid;
     private String comment;
+    private Double created_timestamp_ms;
 
     public CommentDoc(){
 
     }
 
-    public CommentDoc(String authorId){
-        this.authorId = authorId;
+    public CommentDoc(String author_uuid){
+        this.author_uuid = author_uuid;
     }
 
-    public String getStoryId(){
-        return this.storyId;
+    public String getauthor_uuid(){
+        return this.author_uuid;
     }
 
-    public String getComment(){
+    public String getstory_uuid(){
+        return this.story_uuid;
+    }
+
+    public String getContent(){
         return this.comment;
+    }
+
+    public String getAuthor(){
+        return this.author_uuid;
+    }
+
+    public String getDate(){
+        return this.created_timestamp_ms.toString();
     }
 
 }
