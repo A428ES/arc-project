@@ -21,7 +21,7 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @GetMapping("/get-by-userid/{authorId}")
+    @GetMapping("/mycomments/{authorId}")
     public List<CommentDoc> sendDataToBrowser(@PathVariable String authorId) {
         List<CommentDoc> comment = commentService.findCommentsByAuthorId(authorId);
 
