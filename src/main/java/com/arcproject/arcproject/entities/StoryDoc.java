@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class StoryDoc {
     @Id
     private String id;
+    private String uuid;
     private String title;
     private String story;
     private String date;
@@ -18,6 +19,10 @@ public class StoryDoc {
 
     public StoryDoc(){
 
+    }
+
+    public String getuuid(){
+        return this.uuid;
     }
 
     public String getAuthorUuid(){
