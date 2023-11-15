@@ -2,6 +2,7 @@ package com.arcproject.arcproject.entities;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import com.arcproject.arcproject.util.CommonTools;
 
 
 
@@ -12,9 +13,9 @@ public class StoryDoc {
     private String uuid;
     private String title;
     private String story;
-    private String date;
     private String author;
     private String author_uuid;
+    private Double created_timestamp_ms;
 
 
     public StoryDoc(){
@@ -47,8 +48,6 @@ public class StoryDoc {
 
 
     public String getDate(){
-        this.date = "yesterday";
-
-        return this.date;
+        return CommonTools.convertStamp(this.created_timestamp_ms);
     }
 }
