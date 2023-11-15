@@ -1,11 +1,15 @@
 package com.arcproject.arcproject.controllers;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arcproject.arcproject.entities.CommentDoc;
@@ -21,14 +25,29 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @GetMapping("/mycomments/{authorId}")
-    public List<CommentDoc> sendDataToBrowser(@PathVariable String authorId) {
-        List<CommentDoc> comment = commentService.findCommentsByAuthorId(authorId);
+    @PostMapping("/display")
+    public ResponseEntity<Map<String, Object>> commentsDisplay(@RequestBody Map<String, String> payload) {
+        List<CommentDoc> comments = commentService.findByStoryUuid(payload.get("story_id"));
+        Map<String, Object> jsonResponse = new HashMap<>();
+
+        jsonResponse.put("results", comments);
+        
+        return ResponseEntity.ok(jsonResponse);
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<Map<String, Object>> commentsCount(@RequestParam("id") String story_uuid) {
+        List<CommentDoc> comment = commentService.findByStoryUuid(story_uuid);
+
+        Map<String, Object> jsonResponse = new HashMap<>();
+        String total = "0";
 
         if(comment != null){
-            return comment;
-        } else {
-            return null;
-        }
+            total = Integer.toString(comment.size());
+        } 
+
+        jsonResponse.put("results", total);
+
+        return ResponseEntity.ok(jsonResponse);
     }
 }
