@@ -21,7 +21,7 @@ public class StoryController {
         this.storyService = storyService;
     }
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<Map<String, Object>> sendDataToBrowser() {
         List<StoryDoc> stories = storyService.findAll();
 
@@ -34,4 +34,6 @@ public class StoryController {
             return null;
         }
     }
+
+    
 }
