@@ -2,18 +2,18 @@ package com.arcproject.arcproject.entities;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import com.arcproject.arcproject.util.CommonTools;
 
 @Document(collection="comments")
 public class CommentDoc {
     @Id
+    private String id;
     private String uuid;
     private String author_uuid;
     private String story_uuid;
     private String comment;
     private String author;
     private Double created_timestamp_ms;
-    private Double modified_timestamp_ms;
-    private String ip_address;
 
     public CommentDoc(){
 
@@ -52,7 +52,7 @@ public class CommentDoc {
     }
 
     public String getDate(){
-        return this.created_timestamp_ms.toString();
+        return CommonTools.convertStamp(this.created_timestamp_ms);
     }
 
 }
