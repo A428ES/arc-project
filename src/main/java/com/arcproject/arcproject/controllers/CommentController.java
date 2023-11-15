@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.arcproject.arcproject.entities.CommentDoc;
 import com.arcproject.arcproject.service.CommentService;
+import com.arcproject.arcproject.util.CommonTools;
 
 @RestController
 @RequestMapping("/comments")
@@ -38,16 +39,8 @@ public class CommentController {
     @GetMapping("/count")
     public ResponseEntity<Map<String, Object>> commentsCount(@RequestParam("id") String story_uuid) {
         List<CommentDoc> comment = commentService.findByStoryUuid(story_uuid);
+        String total = (comment != null) ? Integer.toString(comment.size()) : "0";
 
-        Map<String, Object> jsonResponse = new HashMap<>();
-        String total = "0";
-
-        if(comment != null){
-            total = Integer.toString(comment.size());
-        } 
-
-        jsonResponse.put("results", total);
-
-        return ResponseEntity.ok(jsonResponse);
+        return ResponseEntity.ok(CommonTools.convertResults(total));
     }
 }
