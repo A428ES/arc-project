@@ -46,8 +46,6 @@ public class CommentService {
             } else {
                 comment.setAuthorName("USER DELETED");
             }
-
-            commentInterface.save(comment);
         });
     }
 }
