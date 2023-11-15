@@ -36,6 +36,10 @@ public class StoryService {
         return stories;
     }
 
+    public List<StoryDoc> searchByTitleOrStory(String query){
+        return storyInterface.searchByTitleOrStory(query);
+    }
+
     public void processStoriesAndUpdateAuthorNames(List<StoryDoc> stories) {
         stories.forEach(story -> {
             UserDoc user = userInterface.findByUuid(story.getAuthorUuid());
@@ -45,8 +49,6 @@ public class StoryService {
             } else {
                 story.setAuthorName("USER DELETED");
             }
-
-            storyInterface.save(story);
         });
     }
 }
