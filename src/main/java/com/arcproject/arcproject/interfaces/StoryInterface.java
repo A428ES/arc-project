@@ -2,6 +2,7 @@ package com.arcproject.arcproject.interfaces;
 import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.arcproject.arcproject.entities.StoryDoc;
@@ -10,5 +11,8 @@ import com.arcproject.arcproject.entities.StoryDoc;
 @Repository
 public interface StoryInterface extends MongoRepository<StoryDoc, String> {
     List<StoryDoc> findAll();
+
+    @Query("{$or: [ { 'title': { $regex: ?0, $options: 'i' } }, { 'story': { $regex: ?0, $options: 'i' } } ]}")
+    List<StoryDoc> searchByTitleOrStory(String query);
 }
 
