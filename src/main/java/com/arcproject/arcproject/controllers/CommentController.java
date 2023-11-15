@@ -1,5 +1,4 @@
 package com.arcproject.arcproject.controllers;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,11 +28,8 @@ public class CommentController {
     @PostMapping("/display")
     public ResponseEntity<Map<String, Object>> commentsDisplay(@RequestBody Map<String, String> payload) {
         List<CommentDoc> comments = commentService.findByStoryUuid(payload.get("story_id"));
-        Map<String, Object> jsonResponse = new HashMap<>();
 
-        jsonResponse.put("results", comments);
-        
-        return ResponseEntity.ok(jsonResponse);
+        return ResponseEntity.ok(CommonTools.convertResults(comments));
     }
 
     @GetMapping("/count")
