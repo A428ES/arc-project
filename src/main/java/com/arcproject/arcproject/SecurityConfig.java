@@ -16,7 +16,6 @@ public class SecurityConfig {
                 .requestMatchers("/login", "/register").permitAll()
                 .anyRequest().authenticated()
             )
-            // Additional configurations as needed
             ;
 
         return http.build();
