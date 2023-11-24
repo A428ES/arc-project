@@ -3,6 +3,8 @@ package com.arcproject.arcproject.entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Document(collection="users")
 public class UserDoc {
     @Id
@@ -11,10 +13,17 @@ public class UserDoc {
     private String uuid;
     private String first_name;
     private String ip_address;
+    private byte[] password;
 
 
     public UserDoc(){
         
+    }
+
+    @JsonIgnore
+    public String getPassword(){
+        
+        return new String(password);
     }
 
     public UserDoc(String uuid){
@@ -32,6 +41,7 @@ public class UserDoc {
     public String getip_address(){
         return this.ip_address;
     }
+
 
     public String getEmail(){
         return this.email;
