@@ -12,6 +12,7 @@ public class UserDoc {
     private String email;
     private String uuid;
     private String first_name;
+    private String last_name;
     private String ip_address;
     private byte[] password;
 
@@ -28,6 +29,18 @@ public class UserDoc {
 
     public UserDoc(String uuid){
         this.uuid = uuid;
+    }
+
+    public String getlastname(){
+        return this.last_name;
+    }
+
+    public String getfirstname(){
+        return this.first_name;
+    }
+
+    public String getUsername(){
+        return this.email;
     }
 
     public String getuuid(){
