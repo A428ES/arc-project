@@ -36,5 +36,10 @@ public class StoryController {
         return ResponseEntity.ok(CommonTools.convertResults(stories));
     }
 
+    @PostMapping("/stories/mystories")
+    public ResponseEntity<Map<String, Object>> userStoriesToBrowser(){
+        return ResponseEntity.ok(CommonTools.convertResults(new Object[0]));
+    }
+
     
 }
