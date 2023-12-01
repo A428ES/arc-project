@@ -1,4 +1,5 @@
 package com.arcproject.arcproject.controllers;
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +17,7 @@ import com.arcproject.arcproject.util.CommonTools;
 @RequestMapping("/")
 public class StoryController {
     private final StoryService storyService;
-    
+
     @Autowired
     public StoryController(StoryService storyService){
         this.storyService = storyService;
@@ -37,9 +38,10 @@ public class StoryController {
     }
 
     @PostMapping("/stories/mystories")
-    public ResponseEntity<Map<String, Object>> userStoriesToBrowser(){
-        return ResponseEntity.ok(CommonTools.convertResults(new Object[0]));
+    public ResponseEntity<Map<String, Object>> userStoriesToBrowser(Principal principal){
+        List<StoryDoc> stories = storyService.findByAuthorId(principal.getName());
+
+        return ResponseEntity.ok(CommonTools.convertResults(stories));
     }
 
-    
 }
