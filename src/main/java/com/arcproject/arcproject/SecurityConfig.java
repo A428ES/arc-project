@@ -36,16 +36,13 @@ public class SecurityConfig {
         .sessionManagement(sessionManagement ->
         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .cors(customizer -> {
-            })
+            })            
+            .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
             .csrf(AbstractHttpConfigurer::disable) 
             .authorizeHttpRequests(authz -> authz
             .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Permit all pre-flight requests
             .requestMatchers("/user/login", "/register", "/", "/stories/search", "/comments/count", "/comments/display", "/error", "/user/check_logged_in").permitAll()
-            .anyRequest().authenticated())
-            .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-
-            
-            ;
+            .anyRequest().authenticated());
 
         return http.build();
     }
