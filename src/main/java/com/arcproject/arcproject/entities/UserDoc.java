@@ -18,7 +18,6 @@ public class UserDoc {
 
 
     public UserDoc(){
-        
     }
 
     @JsonIgnore
@@ -54,7 +53,6 @@ public class UserDoc {
     public String getip_address(){
         return this.ip_address;
     }
-
 
     public String getEmail(){
         return this.email;
