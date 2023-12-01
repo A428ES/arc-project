@@ -62,5 +62,4 @@ public class StoryController {
 
         return ResponseEntity.ok(CommonTools.convertResults("true"));
     }
-
 }
