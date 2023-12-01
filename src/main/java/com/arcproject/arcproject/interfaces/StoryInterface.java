@@ -14,5 +14,8 @@ public interface StoryInterface extends MongoRepository<StoryDoc, String> {
 
     @Query("{$or: [ { 'title': { $regex: ?0, $options: 'i' } }, { 'story': { $regex: ?0, $options: 'i' } } ]}")
     List<StoryDoc> searchByTitleOrStory(String query);
+
+    @Query("{'author_uuid': ?0}")
+    List<StoryDoc> searchByAuthorUuid(String author_uuid);
 }
 
