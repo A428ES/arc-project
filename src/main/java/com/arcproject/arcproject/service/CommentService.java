@@ -52,4 +52,12 @@ public class CommentService {
             comment.setAuthorName(authorName);
         });
     }
+
+    public CommentDoc findByUuid(String uuid){
+        return commentInterface.findByUuId(uuid);
+    }
+
+    public void updateComment(CommentDoc comment){
+        commentInterface.save(comment);
+    }
 }
