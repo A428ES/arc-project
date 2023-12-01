@@ -54,7 +54,7 @@ public class CommentService {
     }
 
     public CommentDoc findByUuid(String uuid){
-        return commentInterface.findByUuId(uuid);
+        return commentInterface.findByUuidAndIsDeletedFalse(uuid);
     }
 
     public void updateComment(CommentDoc comment){
