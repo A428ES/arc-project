@@ -13,6 +13,7 @@ import com.arcproject.arcproject.entities.UserDoc;
 import com.arcproject.arcproject.model.UserRegistration;
 import com.arcproject.arcproject.service.UserService;
 import com.arcproject.arcproject.util.CommonTools;
+import com.arcproject.arcproject.util.SecurityUtil;
 
 @RestController
 public class UserController {
@@ -25,7 +26,7 @@ public class UserController {
 
     @GetMapping("/user/check_logged_in")
     public ResponseEntity<Map<String, Object>> checkLoggedIn(Principal principal) {
-        UserDoc user = userService.getUserByEmail(principal.getName());
+        UserDoc user = userService.userWithStats(principal.getName());
 
         return ResponseEntity.ok(CommonTools.convertResults(user));
     }
@@ -35,5 +36,18 @@ public class UserController {
         userService.newUser(userService.convertToUserDoc(userRegistration));
 
         return ResponseEntity.ok(CommonTools.convertResults("true"));
+    }
+
+    @PostMapping("/user/changepw")
+    public ResponseEntity<Map<String, Object>> userRegistration(@RequestBody Map<String, String> payload, Principal principal){
+        UserDoc workingUser = userService.getUserByEmail(principal.getName());
+
+        if(SecurityUtil.checkPassword(payload.get("old_password"), workingUser.getPassword())){
+            workingUser.setPassword(SecurityUtil.hashPassword(payload.get("new_password")));
+
+            userService.newUser(workingUser);
+        }
+
+        return ResponseEntity.ok(CommonTools.convertResults("complete"));
     }
 }
