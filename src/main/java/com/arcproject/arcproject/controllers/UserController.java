@@ -5,9 +5,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arcproject.arcproject.entities.UserDoc;
+import com.arcproject.arcproject.model.UserRegistration;
 import com.arcproject.arcproject.service.UserService;
 import com.arcproject.arcproject.util.CommonTools;
 
@@ -25,5 +28,12 @@ public class UserController {
         UserDoc user = userService.getUserByEmail(principal.getName());
 
         return ResponseEntity.ok(CommonTools.convertResults(user));
-}
+    }
+
+    @PostMapping("/user/register")
+    public ResponseEntity<Map<String, Object>> userRegistration(@RequestBody UserRegistration userRegistration){
+        userService.newUser(userService.convertToUserDoc(userRegistration));
+
+        return ResponseEntity.ok(CommonTools.convertResults("true"));
+    }
 }
