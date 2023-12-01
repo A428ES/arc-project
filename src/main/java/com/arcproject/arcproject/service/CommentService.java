@@ -51,12 +51,9 @@ public class CommentService {
     public void processCommentsAndUpdateAuthorNames(List<CommentDoc> comments) {
         comments.forEach(comment -> {
             UserDoc user = userInterface.findByUuid(comment.getAuthorUuid());
-
-            if(user != null){
-                comment.setAuthorName(user.getfirst_name());
-            } else {
-                comment.setAuthorName("USER DELETED");
-            }
+            String authorName = user == null ? "USER DELETED" : user.getfirst_name();
+            
+            comment.setAuthorName(authorName);
         });
     }
 }
