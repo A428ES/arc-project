@@ -14,4 +14,7 @@ public interface CommentInterface extends MongoRepository<CommentDoc, String> {
 
     @Query("{ 'story_uuid' : ?0 }")
     List<CommentDoc> findByStoryUuid(String story_uuid);
+
+    @Query("{ 'author_uuid' : ?0 }")
+    List<CommentDoc> findByAUthorId(String author_uuid);
 }
