@@ -11,6 +11,9 @@ public class UserDoc extends BaseDoc {
     private String first_name;
     private String last_name;
     private byte[] password;
+    private Integer story_count;
+    private Integer comment_count;
+    private String created;
 
 
     public UserDoc(){
@@ -38,6 +41,22 @@ public class UserDoc extends BaseDoc {
         return this.first_name;
     }
 
+   public String getEmail(){
+        return this.email;
+    }
+
+    public Integer getstory_count(){
+        return this.story_count;
+    }
+
+    public Integer getcomment_count(){
+        return this.comment_count;
+    }
+
+    public String getcreated(){
+        return this.created;
+    }
+
     public void setFirstName(String firstName){
         this.first_name = firstName;
     }
@@ -54,7 +73,17 @@ public class UserDoc extends BaseDoc {
         this.password = password;
     }
 
-    public String getEmail(){
-        return this.email;
+    public void setStoryCount(Integer storyCount){
+        this.story_count = storyCount;
     }
+
+    public void setCommentCount(Integer commentCount){
+        this.comment_count = commentCount;
+    }
+
+    public void setCreated(String created){
+        this.created = created;
+    }
+
+ 
 }
