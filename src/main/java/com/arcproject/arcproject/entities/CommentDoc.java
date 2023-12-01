@@ -1,19 +1,13 @@
 package com.arcproject.arcproject.entities;
-
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import com.arcproject.arcproject.util.CommonTools;
 
 @Document(collection="comments")
-public class CommentDoc {
-    @Id
-    private String id;
-    private String uuid;
+public class CommentDoc extends BaseDoc {
+
     private String author_uuid;
     private String story_uuid;
     private String comment;
     private String author;
-    private Double created_timestamp_ms;
 
     public CommentDoc(){
 
@@ -28,7 +22,7 @@ public class CommentDoc {
     }
 
     public String getcomment_uuid(){
-        return this.uuid;
+        return this.getuuid();
     }
 
     public String getstory_uuid(){
@@ -51,8 +45,15 @@ public class CommentDoc {
         this.author = author;
     }
 
-    public String getDate(){
-        return CommonTools.convertStamp(this.created_timestamp_ms);
+    public void setAuthor(String uuid){
+        this.author_uuid = uuid;
     }
 
+    public void setComment(String comment){
+        this.comment = comment;
+    }
+
+    public void setStoryUuid(String storyUuid){
+        this.story_uuid = storyUuid;
+    }
 }
