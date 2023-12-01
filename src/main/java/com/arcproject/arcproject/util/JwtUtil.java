@@ -19,7 +19,6 @@ public class JwtUtil {
     private Key key;
 
     public JwtUtil() {
-        // Generate a secure key for signing the JWT (you might want to store this key securely)
         this.key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     }
 

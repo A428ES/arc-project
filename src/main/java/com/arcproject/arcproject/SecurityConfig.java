@@ -40,7 +40,7 @@ public class SecurityConfig {
             .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
             .csrf(AbstractHttpConfigurer::disable) 
             .authorizeHttpRequests(authz -> authz
-            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Permit all pre-flight requests
+            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() 
             .requestMatchers("/user/login", "/register", "/", "/stories/search", "/comments/count", "/comments/display", "/error", "/user/check_logged_in").permitAll()
             .anyRequest().authenticated());
 
@@ -50,9 +50,9 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("*"); // Customize allowed origins
-        configuration.addAllowedMethod("*"); // Customize allowed methods
-        configuration.addAllowedHeader("*"); // Customize allowed headers
+        configuration.addAllowedOrigin("*"); 
+        configuration.addAllowedMethod("*"); 
+        configuration.addAllowedHeader("*"); 
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
