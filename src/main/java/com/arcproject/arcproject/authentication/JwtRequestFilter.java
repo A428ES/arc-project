@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
-
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
