@@ -67,4 +67,25 @@ public class CommentController {
         return ResponseEntity.ok(CommonTools.convertResults(comments));
     }
 
+    
+    @PostMapping("/delete")
+    public ResponseEntity<Map<String, Object>> deleteComment(@RequestBody Map<String, String> payload, Principal principal){
+
+        UserDoc user = userService.getUserByEmail(principal.getName());
+        CommentDoc commentToDelete = commentService.findByUuid(payload.get("uuid"));
+        String outcome = "No change processed";
+
+        if(commentToDelete != null){
+            if(commentToDelete.getAuthorUuid().equals(user.getuuid())){
+                commentToDelete.setDeleted(true);
+                commentService.updateComment(commentToDelete);
+                outcome = commentToDelete.getuuid();
+            } else {
+                outcome = "This comment does not belong to authenticated user";
+            }
+        }
+
+        return ResponseEntity.ok(CommonTools.convertResults(outcome));
+    }
+
 }
