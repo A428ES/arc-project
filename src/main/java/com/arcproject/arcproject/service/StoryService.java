@@ -3,7 +3,6 @@ package com.arcproject.arcproject.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Service;
 
 import com.arcproject.arcproject.entities.StoryDoc;
@@ -20,12 +19,6 @@ public class StoryService {
     public StoryService(StoryInterface storyInterface, UserInterface userInterface){
         this.storyInterface = storyInterface;
         this.userInterface = userInterface;
-    }
-
-    @Autowired
-
-    public StoryInterface returnService(){
-        return storyInterface;
     }
 
     public List<StoryDoc> findAll(){
@@ -51,12 +44,9 @@ public class StoryService {
     public void processStoriesAndUpdateAuthorNames(List<StoryDoc> stories) {
         stories.forEach(story -> {
             UserDoc user = userInterface.findByUuid(story.getAuthorUuid());
+            String authorName = user == null ? "USER DELETED" : user.getfirst_name();
 
-            if(user != null){
-                story.setAuthorName(user.getfirst_name());
-            } else {
-                story.setAuthorName("USER DELETED");
-            }
+            story.setAuthorName(authorName);
         });
     }
 }
