@@ -1,7 +1,6 @@
 package com.arcproject.arcproject.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +30,18 @@ public class CommentService {
 
     public List<CommentDoc> findByStoryUuid(String story_uuid){
         List<CommentDoc> comments = commentInterface.findByStoryUuid(story_uuid);
+
+        this.processCommentsAndUpdateAuthorNames(comments);
+
+        return comments;
+    }
+
+    public void addComment(CommentDoc newComment){
+        commentInterface.save(newComment);
+    }
+
+    public List<CommentDoc> findByAuthorId(String author_uuid){
+        List<CommentDoc> comments = commentInterface.findByAuthorId(author_uuid);
 
         this.processCommentsAndUpdateAuthorNames(comments);
 
