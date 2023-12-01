@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arcproject.arcproject.entities.CommentDoc;
-import com.arcproject.arcproject.entities.StoryDoc;
 import com.arcproject.arcproject.entities.UserDoc;
 import com.arcproject.arcproject.service.CommentService;
 import com.arcproject.arcproject.service.UserService;
