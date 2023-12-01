@@ -20,10 +20,6 @@ public class CommentService {
         this.userInterface = userInterface;
     }
 
-    public CommentInterface returnService(){
-        return commentInterface;
-    }
-
     public List<CommentDoc> findCommentsByAuthorId(String author_uuid){
         return commentInterface.findByAuthorId(author_uuid);
     }

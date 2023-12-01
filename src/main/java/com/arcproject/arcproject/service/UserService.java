@@ -15,10 +15,6 @@ public class UserService {
         this.userInterface = userInterface;
     }
 
-    public UserInterface returnService(){
-        return userInterface;
-    }
-
     public UserDoc getUserByEmail(String userEmail) {
         return userInterface.findByEmail(userEmail);
     }
