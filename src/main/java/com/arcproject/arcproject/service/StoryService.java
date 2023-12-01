@@ -44,6 +44,10 @@ public class StoryService {
         return storyInterface.searchByAuthorUuid(authorUuid);
     }
 
+    public StoryDoc createStory(StoryDoc newStory){
+        return storyInterface.save(newStory);
+    }
+
     public void processStoriesAndUpdateAuthorNames(List<StoryDoc> stories) {
         stories.forEach(story -> {
             UserDoc user = userInterface.findByUuid(story.getAuthorUuid());
