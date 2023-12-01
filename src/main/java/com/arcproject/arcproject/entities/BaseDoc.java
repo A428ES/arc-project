@@ -5,7 +5,7 @@ import com.arcproject.arcproject.util.CommonTools;
 import java.util.UUID;
 
 public abstract class BaseDoc {
-
+    
     @Id
     private String id;
 
@@ -28,10 +28,9 @@ public abstract class BaseDoc {
 
     private double getCurrentUnixTime() {
         long currentTimeMillis = System.currentTimeMillis();
-        return currentTimeMillis / 1000.0; // Convert milliseconds to seconds with fractional part
+        return currentTimeMillis / 1000.0;
     }
 
-    // Getters
     public String getuuid() {
         return uuid;
     }
@@ -56,7 +55,6 @@ public abstract class BaseDoc {
         return isDeleted;
     }
 
-    // Setters
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
