@@ -4,7 +4,6 @@ public class AuthenticationRequest {
     private String email;
     private String password;
 
-    // Default constructor for JSON parsing
     public AuthenticationRequest() {}
 
     public AuthenticationRequest(String email, String password) {
@@ -12,7 +11,6 @@ public class AuthenticationRequest {
         this.password = password;
     }
 
-    // Getters and setters
     public String getEmail() {
         return email;
     }
