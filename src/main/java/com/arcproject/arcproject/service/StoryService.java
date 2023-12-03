@@ -1,5 +1,4 @@
 package com.arcproject.arcproject.service;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,8 @@ import com.arcproject.arcproject.entities.StoryDoc;
 import com.arcproject.arcproject.entities.UserDoc;
 import com.arcproject.arcproject.interfaces.StoryInterface;
 import com.arcproject.arcproject.interfaces.UserInterface;
+
+import java.util.Collections;
 
 @Service
 public class StoryService {
@@ -26,6 +27,7 @@ public class StoryService {
         List<StoryDoc> stories = storyInterface.findAll();
 
         this.processStoriesAndUpdateAuthorNames(stories);
+        Collections.reverse(stories);
 
         return stories;
     }
