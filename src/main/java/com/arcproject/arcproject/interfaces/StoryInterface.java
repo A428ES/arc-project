@@ -12,10 +12,10 @@ import com.arcproject.arcproject.entities.StoryDoc;
 public interface StoryInterface extends MongoRepository<StoryDoc, String> {
     List<StoryDoc> findAll();
 
-    @Query("{$or: [ { 'title': { $regex: ?0, $options: 'i' } }, { 'story': { $regex: ?0, $options: 'i' } } ]}")
+    @Query("{$or: [ { 'title': { $regex: ?0, $options: 'i' } }, { 'story': { $regex: ?0, $options: 'i' } } ], is_deleted: false}")
     List<StoryDoc> searchByTitleOrStory(String query);
 
-    @Query("{'author_uuid': ?0}")
+    @Query("{'author_uuid': ?0, is_deleted: false}")
     List<StoryDoc> searchByAuthorUuid(String author_uuid);
 }
 
