@@ -13,7 +13,7 @@ public abstract class BaseDoc {
     private String ip_address;
     private double created_timestamp_ms;
     private double modified_timestamp_ms;
-    private boolean isDeleted;
+    private boolean is_deleted;
 
     public BaseDoc() {
         if (this.uuid == null) {
@@ -21,7 +21,7 @@ public abstract class BaseDoc {
         double currentTimestamp = getCurrentUnixTime();
         this.created_timestamp_ms = currentTimestamp;
         this.modified_timestamp_ms = currentTimestamp;
-        this.isDeleted = false;
+        this.is_deleted = false;
         this.ip_address = "127.0.0.1";
         }
     }
@@ -52,7 +52,7 @@ public abstract class BaseDoc {
     }
 
     public boolean isDeleted() {
-        return isDeleted;
+        return this.is_deleted;
     }
 
     public void setUuid(String uuid) {
@@ -71,7 +71,7 @@ public abstract class BaseDoc {
         this.modified_timestamp_ms = modifiedTimestampMs;
     }
 
-    public void setDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
+    public void setDeleted(boolean is_deleted) {
+        this.is_deleted = is_deleted;
     }
 }
