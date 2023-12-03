@@ -9,11 +9,12 @@ import com.arcproject.arcproject.entities.CommentDoc;
 
 @Repository
 public interface CommentInterface extends MongoRepository<CommentDoc, String> {
-    @Query("{ 'author_uuid' : ?0 , 'isDeleted': false}")
+    @Query("{ 'author_uuid' : ?0 , 'is_deleted': false}")
     List<CommentDoc> findByAuthorId(String author_uuid);
 
-    @Query("{ 'story_uuid' : ?0, 'isDeleted': false}")
+    @Query("{ 'story_uuid' : ?0, 'is_deleted': false}")
     List<CommentDoc> findByStoryUuid(String story_uuid);
 
-    CommentDoc findByUuidAndIsDeletedFalse(String uuid);
+    @Query("{ 'uuid' : ?0, 'is_deleted': false}")
+    CommentDoc findByUuid(String uuid);     
 }
