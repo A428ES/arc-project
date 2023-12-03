@@ -78,7 +78,7 @@ public class CommentController {
         if(commentToDelete != null){
             if(commentToDelete.getAuthorUuid().equals(user.getuuid())){
                 commentToDelete.setDeleted(true);
-                commentService.updateComment(commentToDelete);
+commentService.updateComment(commentToDelete);                                                                                                              
                 outcome = commentToDelete.getuuid();
             } else {
                 outcome = "This comment does not belong to authenticated user";
