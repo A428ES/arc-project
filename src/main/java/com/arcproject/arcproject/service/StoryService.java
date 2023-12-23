@@ -46,10 +46,18 @@ public class StoryService {
 
     public void processStoriesAndUpdateAuthorNames(List<StoryDoc> stories) {
         stories.forEach(story -> {
-            UserDoc user = userInterface.findByUuid(story.getAuthorUuid());
+            UserDoc user = userInterface.findByUuid(story.getAuthor_uuid());
             String authorName = user == null ? "USER DELETED" : user.getfirst_name();
 
             story.setAuthorName(authorName);
         });
+    }
+
+    public StoryDoc findByUuid(String uuid){
+        return storyInterface.findByUuid(uuid);
+    }
+
+    public void updateStory(StoryDoc story){
+        storyInterface.save(story);
     }
 }
