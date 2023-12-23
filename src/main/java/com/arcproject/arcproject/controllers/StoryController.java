@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.arcproject.arcproject.entities.StoryDoc;
 import com.arcproject.arcproject.entities.UserDoc;
 import com.arcproject.arcproject.service.StoryService;
@@ -62,4 +63,45 @@ public class StoryController {
 
         return ResponseEntity.ok(CommonTools.convertResults("true"));
     }
+
+    @PostMapping("/stories/delete")
+    public ResponseEntity<Map<String, Object>> deleteStory(@RequestBody Map<String, String> payload, Principal principal){
+
+        UserDoc user = userService.getUserByEmail(principal.getName());
+        StoryDoc storyToDelete = storyService.findByUuid(payload.get("uuid"));
+        String outcome = "No change processed";
+
+        if(storyToDelete != null){
+            if(storyToDelete.getAuthor_uuid().equals(user.getuuid())){
+                storyToDelete.setDeleted(true);
+                storyService.updateStory(storyToDelete);                                                                                                              
+                outcome = storyToDelete.getuuid();
+            } else {
+                outcome = "This story does not belong to authenticated user";
+            }
+        }
+
+        return ResponseEntity.ok(CommonTools.convertResults(outcome));
+    }
+
+    @PostMapping("/stories/edit")
+    public ResponseEntity<Map<String, Object>> editStory(@RequestBody Map<String, String> payload, Principal principal){
+
+        UserDoc user = userService.getUserByEmail(principal.getName());
+        StoryDoc storyToDelete = storyService.findByUuid(payload.get("uuid"));
+        String outcome = "No change processed";
+
+        if(storyToDelete != null){
+            if(storyToDelete.getAuthor_uuid().equals(user.getuuid())){
+                storyToDelete.setStory(payload.get("new_content"));
+                storyService.updateStory(storyToDelete);                                                                                                              
+                outcome = storyToDelete.getuuid();
+            } else {
+                outcome = "This story does not belong to authenticated user";
+            }
+        }
+
+        return ResponseEntity.ok(CommonTools.convertResults(outcome));
+    }
+
 }
