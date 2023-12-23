@@ -10,6 +10,7 @@ import com.arcproject.arcproject.entities.StoryDoc;
 
 @Repository
 public interface StoryInterface extends MongoRepository<StoryDoc, String> {
+    @Query("{is_deleted:false}")
     List<StoryDoc> findAll();
 
     @Query("{$or: [ { 'title': { $regex: ?0, $options: 'i' } }, { 'story': { $regex: ?0, $options: 'i' } } ], is_deleted: false}")
@@ -17,5 +18,8 @@ public interface StoryInterface extends MongoRepository<StoryDoc, String> {
 
     @Query("{'author_uuid': ?0, is_deleted: false}")
     List<StoryDoc> searchByAuthorUuid(String author_uuid);
+
+    @Query("{ 'uuid' : ?0, 'is_deleted': false}")
+    StoryDoc findByUuid(String uuid);     
 }
 
