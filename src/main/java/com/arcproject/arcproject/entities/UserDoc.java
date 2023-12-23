@@ -14,6 +14,7 @@ public class UserDoc extends BaseDoc {
     private Integer story_count;
     private Integer comment_count;
     private String created;
+    private String access;
 
 
     public UserDoc(){
@@ -83,6 +84,14 @@ public class UserDoc extends BaseDoc {
 
     public void setCreated(String created){
         this.created = created;
+    }
+
+    public String getAccess(){
+        return this.access;
+    }
+
+    public void setAccess(String access){
+        this.access = access;
     }
 
  
