@@ -3,8 +3,8 @@ package com.arcproject.arcproject.controllers;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.arcproject.arcproject.authentication.CustomUserDetailsService;
+import com.arcproject.arcproject.entities.UserDoc;
 import com.arcproject.arcproject.model.AuthenticationRequest;
-import com.arcproject.arcproject.model.AuthenticationResponse;
 import com.arcproject.arcproject.util.CommonTools;
 import com.arcproject.arcproject.util.JwtUtil;
 
@@ -28,6 +28,10 @@ public class AuthenticationController {
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
+    @GetMapping(value = "/checkonline")
+    public ResponseEntity<?> checkOnline(){
+        return ResponseEntity.ok(CommonTools.convertResults("online"));
+    }
 
     @GetMapping(value = "/user/login")
     public ResponseEntity<?> createAuthenticationToken(AuthenticationRequest authenticationRequest) throws Exception {
@@ -39,11 +43,11 @@ public class AuthenticationController {
             throw new Exception("Incorrect username or password", e);
         }
 
-        final UserDetails userDetails = userDetailsService
+        UserDetails userDetails = userDetailsService
                 .loadUserByUsername(authenticationRequest.getEmail());
 
-        final String jwt = jwtTokenUtil.generateToken(userDetails);
+        UserDoc userDetail = userDetailsService.getUserLoginResponse(userDetails.getUsername(), jwtTokenUtil.generateToken(userDetails));
 
-        return ResponseEntity.ok(CommonTools.convertResults(new AuthenticationResponse(jwt)));
+        return ResponseEntity.ok(CommonTools.convertResults(userDetail));
     }
 }
