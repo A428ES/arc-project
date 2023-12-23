@@ -41,7 +41,7 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable) 
             .authorizeHttpRequests(authz -> authz
             .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() 
-            .requestMatchers("/user/login", "/user/register", "/", "/stories/search", "/comments/count", "/comments/display", "/error", "/user/check_logged_in").permitAll()
+            .requestMatchers("/user/login", "/checkonline", "/user/register", "/", "/stories/search", "/comments/count", "/comments/display", "/error", "/user/check_logged_in").permitAll()
             .anyRequest().authenticated());
 
         return http.build();
