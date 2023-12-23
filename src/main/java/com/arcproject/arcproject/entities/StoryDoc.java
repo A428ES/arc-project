@@ -14,7 +14,7 @@ public class StoryDoc extends BaseDoc {
 
     }
 
-    public String getAuthorUuid(){
+    public String getAuthor_uuid(){
         return this.author_uuid;
     }
 
